@@ -1,15 +1,27 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <h1 class="text-black display-4 mb-5 ">Todo List</h1>
+    <InputField :todos="todos" :newTodo="newTodo"/>
+    <ListTodo :todos="todos" />
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import InputField from '@/components/InputField.vue'
+import ListTodo from '@/components/ListTodo.vue'
 
 export default {
   name: 'App',
+  data() {
+    return {
+      todos: [],
+      newTodo: '',
+      serialNumber: 0
+    };
+  },
   components: {
-    HelloWorld
+    InputField,
+    ListTodo,
   }
 }
 </script>
