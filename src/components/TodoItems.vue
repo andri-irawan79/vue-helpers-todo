@@ -1,22 +1,24 @@
 <template>
-<td>{{index + 1}}.</td>
-<td v-if="isEdit == false" class="text-start">{{todo}}</td>
-<td v-else>
-    <input type="text" ref="search" class="form-control"  v-model="editedTodo">
-</td>
-<td>
-    <div>
-        <button class="btn btn-danger bg-danger m-1" @click="deletTodo(index)">
-                <i class="bi bi-trash-fill me-1"></i><span>Delet</span>
-        </button>
-        <button v-if="this.isEdit == false" @click="doEdit(index)" class="btn btn-info bg-info m-1" >
-            <i class="bi bi-pencil-square me-1"></i><span>Edit</span>
-        </button>
-        <button v-else @click="addEdit(index)" class="btn btn-info bg-info m-1">
-            <i class="bi bi-pencil-square me-1"></i><span>Done</span>
-        </button>
-    </div>
-</td>
+    <td>{{index + 1}}.</td>
+    <td v-if="isEdit == false" class="text-start">
+        <router-link to="/description" class=" text-decoration-none text-black">{{todo}}</router-link>
+    </td>
+    <td v-else>
+        <input type="text" ref="search" class="form-control" v-model="editedTodo">
+    </td>
+    <td>
+        <div>
+            <button class="btn btn-danger bg-danger m-1" @click="deletTodo(index)">
+                    <i class="bi bi-trash-fill me-1"></i><span>Delet</span>
+            </button>
+            <button v-if="this.isEdit == false" @click="doEdit(index)" class="btn btn-info bg-info m-1" >
+                <i class="bi bi-pencil-square me-1"></i><span>Edit</span>
+            </button>
+            <button v-else @click="addEdit(index)" class="btn btn-info bg-info m-1">
+                <i class="bi bi-pencil-square me-1"></i><span>Done</span>
+            </button>
+        </div>
+    </td>
 </template>
 
 <script>
