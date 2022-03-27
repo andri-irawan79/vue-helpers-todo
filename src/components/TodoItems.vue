@@ -24,34 +24,39 @@
 <script>
 export default {
     name: 'TodoItems',
-    props: {
-        todoList: Array,
-        todo: String,
-        index: Number,
-    },
     data(){
         return {
             isEdit: false,
             editedTodo: '',
-            editStatusButton: 'Edit',
-            toDoing: this.todoList,
         };
+    },
+    props: {
+        todos: Array,
+        todo: String,
+        index: Number,
     },
     methods: {
         deletTodo(index) {
-            this.toDoing.splice(index, 1);
+            this.$store.dispatch("deleteTodosItem", index);
         },
         doEdit(index){ 
             this.isEdit = true;
-            this.editedTodo = this.toDoing[index];
-            this.$refs.search.focus();
+            this.editedTodo = this.todos[index].items;
         },
         addEdit(index){
             if (this.editedTodo === '') {
                 alert('Data masih kosong')
             }
             else {
-                this.toDoing.splice(index, 1, this.editedTodo);
+                const newValueTodos = {
+                    currentIndex: this.index,
+                    newTodoSet: {
+                        items: this.editedTodo,
+                        description: this.todos[index].description,
+                    }
+                }
+                this.$store.dispatch("editTodosItem", newValueTodos);
+                console.log(index);
                 this.isEdit = false;
             }   
         }
