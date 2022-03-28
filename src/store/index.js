@@ -33,6 +33,11 @@ export default createStore({
       editItems.splice(payload.currentIndex, 1, payload.newTodoSet);
       store.commit('setTodoItem', editItems);
     },
+    editTodosDesc(store, payload) {
+      const editItems = store.state.todosItems;
+      editItems.splice(payload.newCurrentIndex, 1, payload.newTodoSet);
+      store.commit('setTodoItem', editItems);
+    },
   },
   modules: {
   }

@@ -1,7 +1,7 @@
 <template>
     <td>{{index + 1}}.</td>
     <td v-if="isEdit == false" class="text-start">
-        <router-link to="/description" class=" text-decoration-none text-black">{{todo}}</router-link>
+        <router-link :to="{ name: 'description', params: { currentIndex: this.index }}" class=" text-decoration-none text-black">{{todo}}</router-link>
     </td>
     <td v-else>
         <input type="text" ref="search" class="form-control" v-model="editedTodo">

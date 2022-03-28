@@ -9,11 +9,11 @@
         </div>
         <h1>Menjadi Frontend Dev</h1>
         <div>
-            <p>{{itemDescription}}</p>
+            <p>{{setTodo[this.id].description}}</p>
         </div>
         <div v-if="isEditDesc == false">
             <button class="btn btn-info" @click="doEditDesc">
-                <i class="bi bi-pencil-square"></i><span class="ms-1">Ubah description</span>
+                <i class="bi bi-pencil-square"></i><span class="ms-1">Edit deskripsi</span>
                 </button>
         </div>
         <div v-else class="col-11 col-sm-5">
@@ -31,22 +31,42 @@ export default {
     data() {
         return {
             isEditDesc: false,
-            itemDescription: 'Belum ada deskripsi',
             newDescription: '',
         };
     },
     methods: {
         doEditDesc() {
             this.isEditDesc = true;
-            this.newDescription = this.itemDescription;
+            this.newDescription = this.setTodo[this.id].description;
         },
         saveEditedDesc() {
-            this.itemDescription = this.newDescription;
-            this.isEditDesc = false;
+            // this.itemDescription = this.newDescription;
+            // this.isEditDesc = false;
+            if (this.newDescription === '') {
+                alert('Data masih kosong')
+            }
+            else {
+                const newValueTodos = {
+                    newCurrentIndex: this.id,
+                    newTodoSet: {
+                        items: this.setTodo[this.id].items,
+                        description: this.newDescription,
+                    }
+                }
+                this.$store.dispatch("editTodosDesc", newValueTodos);
+                console.log(this.id);
+                this.isEditDesc = false;
+            }   
         }
-    }
-
-
+    },
+    computed: {
+        setTodo () {
+        return this.$store.state.todosItems;
+        },
+        id(){
+            return this.$route.params.currentIndex;
+        }
+    },
 }
 </script>
 
