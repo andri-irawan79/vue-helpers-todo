@@ -1,13 +1,11 @@
 <template>
     <div class="description container-lg flex justify-content-top ms-4">
         <div>
-            <router-link to="/">
-                <button class="btn btn-danger">
-                    <i class="bi bi-arrow-counterclockwise"></i><span class="ms-1">Kembali</span>
-                </button>
-            </router-link>
+            <button class="btn btn-danger" @click="redirectTo('/')">
+                <i class="bi bi-arrow-counterclockwise"></i><span class="ms-1">Kembali</span>
+            </button>
         </div>
-        <h1>Menjadi Frontend Dev</h1>
+        <h1>{{setTodo[this.id].items}}</h1>
         <div>
             <p>{{setTodo[this.id].description}}</p>
         </div>
@@ -40,8 +38,6 @@ export default {
             this.newDescription = this.setTodo[this.id].description;
         },
         saveEditedDesc() {
-            // this.itemDescription = this.newDescription;
-            // this.isEditDesc = false;
             if (this.newDescription === '') {
                 alert('Data masih kosong')
             }
@@ -56,16 +52,19 @@ export default {
                 this.$store.dispatch("editTodosDesc", newValueTodos);
                 console.log(this.id);
                 this.isEditDesc = false;
-            }   
-        }
+            }  
+        },
+        redirectTo(path){
+            this.$router.push(path)
+        } 
     },
     computed: {
+        id(){
+            return this.$route.params.currentIndex;
+        },
         setTodo () {
         return this.$store.state.todosItems;
         },
-        id(){
-            return this.$route.params.currentIndex;
-        }
     },
 }
 </script>
