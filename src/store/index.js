@@ -1,44 +1,46 @@
 import { createStore } from 'vuex';
 import createPersistedState from 'vuex-persistedstate';
 
-const persistedstate = createPersistedState({
-  paths: ['todosItems', 'itemIndex'],
-});
+// const persisted = createPersistedState({
+  
+// });
 
 export default createStore({
-  plugins: [persistedstate],
+  plugins: [createPersistedState({
+    paths: ['newTodosItem', 'itemIndex'],
+  })],
   state: {
-    todosItems: [],
-    itemIndex: 0,
+    newTodosItem: [],
+    newItemIndex: 0,
   },
   getters: {
   },
   mutations: {
     setTodoItem(state, payload) {
-      state.todosItems = payload; 
+      state.newTodosItem = payload; 
     }, 
     setItemIndex(state, payload){
-      state.itemIndex = payload;
+      state.newItemIndex = payload;
     }
   },
   actions: {
     addTodosValue(store, payload) {
-      const todosItems = store.state.todosItems;
-      todosItems.push(payload);
-      store.commit('setTodoItem', todosItems);
+      const newTodosItem = store.state.newTodosItem;
+      newTodosItem.push(payload);
+      store.commit('setTodoItem', newTodosItem);
     },
     deleteTodosItem(store, index) {
-      const deleteItems = store.state.todosItems;
+      const deleteItems = store.state.newTodosItem;
       deleteItems.splice(index, 1);
       store.commit('setTodoItem', deleteItems);
     },
     editTodosItem(store, payload) {
-      const editItems = store.state.todosItems;
+      const editItems = store.state.newTodosItem;
       editItems.splice(payload.currentIndex, 1, payload.newTodoSet);
       store.commit('setTodoItem', editItems);
     },
     editTodosDesc(store, payload) {
-      const editItems = store.state.todosItems;
+      const editItems = store.state.newTodosItem;
       editItems.splice(payload.newCurrentIndex, 1, payload.newTodoSet);
       store.commit('setTodoItem', editItems);
     },

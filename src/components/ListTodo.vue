@@ -24,7 +24,7 @@ export default {
     },
     computed: {
         setTodo() {
-            return this.$store.state.todosItems;
+            return this.$store.state.newTodosItem;
         }
     }
 }

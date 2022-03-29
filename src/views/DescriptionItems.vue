@@ -60,10 +60,10 @@ export default {
     },
     computed: {
         setTodo () {
-            return this.$store.state.todosItems;
+            return this.$store.state.newTodosItem;
         },
         setIndex(){
-            return this.$store.state.itemIndex;
+            return this.$store.state.newItemIndex;
         },   
     },
 }
