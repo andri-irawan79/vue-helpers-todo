@@ -1,7 +1,7 @@
 <template>
     <td>{{index + 1}}.</td>
     <td v-if="isEdit == false" class="text-start">
-        <router-link :to="{ name: 'description', params: { currentIndex: this.index }}" class=" text-decoration-none text-black">{{todo}}</router-link>
+        <router-link to="/description" @click="changeIndex(index)" class=" text-decoration-none text-black">{{todo}}</router-link>
     </td>
     <td v-else>
         <input type="text" ref="search" class="form-control" v-model="editedTodo">
@@ -59,8 +59,11 @@ export default {
                 console.log(index);
                 this.isEdit = false;
             }   
+        },
+        changeIndex(index){
+            this.$store.dispatch('editItemIndex', index)
         }
-    }
+    },
 }
 </script>
 

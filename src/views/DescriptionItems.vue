@@ -5,9 +5,9 @@
                 <i class="bi bi-arrow-counterclockwise"></i><span class="ms-1">Kembali</span>
             </button>
         </div>
-        <h1>{{setTodo[this.id].items}}</h1>
+        <h1>{{setTodo[setIndex].items}}</h1>
         <div>
-            <p>{{setTodo[this.id].description}}</p>
+            <p>{{setTodo[setIndex].description}}</p>
         </div>
         <div v-if="isEditDesc == false">
             <button class="btn btn-info" @click="doEditDesc">
@@ -63,8 +63,11 @@ export default {
             return this.$route.params.currentIndex;
         },
         setTodo () {
-        return this.$store.state.todosItems;
+            return this.$store.state.todosItems;
         },
+        setIndex(){
+            return this.$store.state.itemIndex;
+        },   
     },
 }
 </script>

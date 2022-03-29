@@ -2,20 +2,24 @@ import { createStore } from 'vuex';
 import createPersistedState from 'vuex-persistedstate';
 
 const persistedstate = createPersistedState({
-  paths: ['todosItems'],
+  paths: ['todosItems', 'itemIndex'],
 });
 
 export default createStore({
   plugins: [persistedstate],
   state: {
     todosItems: [],
+    itemIndex: 0,
   },
   getters: {
   },
   mutations: {
     setTodoItem(state, payload) {
       state.todosItems = payload; 
-    } 
+    }, 
+    setItemIndex(state, payload){
+      state.itemIndex = payload;
+    }
   },
   actions: {
     addTodosValue(store, payload) {
@@ -38,6 +42,9 @@ export default createStore({
       editItems.splice(payload.newCurrentIndex, 1, payload.newTodoSet);
       store.commit('setTodoItem', editItems);
     },
+    editItemIndex(store, payload){
+      store.commit('setItemIndex', payload);
+    }
   },
   modules: {
   }
