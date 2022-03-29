@@ -35,7 +35,7 @@ export default {
     methods: {
         doEditDesc() {
             this.isEditDesc = true;
-            this.newDescription = this.setTodo[this.id].description;
+            this.newDescription = this.setTodo[this.setIndex].description;
         },
         saveEditedDesc() {
             if (this.newDescription === '') {
@@ -43,14 +43,14 @@ export default {
             }
             else {
                 const newValueTodos = {
-                    newCurrentIndex: this.id,
+                    newCurrentIndex: this.setIndex,
                     newTodoSet: {
-                        items: this.setTodo[this.id].items,
+                        items: this.setTodo[this.setIndex].items,
                         description: this.newDescription,
                     }
                 }
                 this.$store.dispatch("editTodosDesc", newValueTodos);
-                console.log(this.id);
+                console.log(this.setIndex);
                 this.isEditDesc = false;
             }  
         },
@@ -59,9 +59,6 @@ export default {
         } 
     },
     computed: {
-        id(){
-            return this.$route.params.currentIndex;
-        },
         setTodo () {
             return this.$store.state.todosItems;
         },
